@@ -1,0 +1,84 @@
+:root {
+  --blue: rgb(95, 168, 197);
+  --dark: rgb(58, 58, 58);
+  --bluedark: rgb(74, 125, 145);
+  --darker: rgb(43, 42, 42);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: var(--blue);
+  background: linear-gradient(to right top, var(--dark), var(--blue));
+}
+
+.bg_img {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 50%;
+  opacity: 0.25;
+  transform: translate(-50%, -50%);
+}
+
+.img {
+  width: 250px;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.car {
+  width: 75%;
+  margin: auto;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--bluedark);
+  background: linear-gradient(to right top, var(--darker), var(--bluedark));
+}
+
+.car img {
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+h1 {
+  color: white;
+  display: block;
+  text-align: center;
+}
+
+p {
+  color: white;
+}
+
+p strong {
+  color: rgb(153, 214, 238);
+}
+.car-brand {
+  color: rgb(153, 214, 238);
+  font-size: 30px;
+}
+.car-model {
+  color: whitesmoke;
+  font-size: 30px;
+}
+
+.car-price {
+  color: whitesmoke;
+  font-size: 30px;
+}
+
+#chosenCar {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}

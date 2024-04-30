@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buy a car</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="bg">
+      <img src="./assets/Auto1.png" alt="" class="bg_img" />
+    </div>
+    <div class="carContainer">
+      <header>
+        <h1>Choose your dream car</h1>
+      </header>
+      <span id="carImg"></span>
+      <ul id="carListings"></ul>
+    </div>
+
+    <div id="form" class="hidden">
+      <div id="chosenCar">
+        <p>Total price: <span id="totalPrice"></span></p>
+        <p>Chosen car: <span id="carName"></span></p>
+      </div>
+
+      <form id="cashLeasing">
+        <input type="radio" id="leasing" name="paymentOption" value="leasing" />
+        <label for="leasing">Leasing</label><br />
+        <input
+          type="radio"
+          id="cash"
+          name="paymentOption"
+          value="cash"
+          checked
+        />
+        <label for="cash">Cash</label>
+      </form>
+
+      <div id="ownerName">
+        <form>
+          <label for="nameSurname">Name Surname: </label>
+          <input type="text" id="nameSurname" required /><br />
+          <label for="deliveryDate">: Delivery date</label>
+          <input type="date" id="deliveryDate" required />
+        </form>
+      </div>
+      <p>Accessories List</p>
+      <ul id="accessories"></ul>
+
+      <div id="orderSummary"></div>
+      <button type="button" id="confirm-order-btn">Confirm Order</button>
+      <button type="button" id="back-btn">Back</button>
+    </div>
+    <div id="confirmPage" class="hidden">
+      <p>
+        Thank you for shopping with us
+        <span id="confirmPageCar"></span>
+      </p>
+      <p>Chosen payment form: <span id="paymentForm"></span></p>
+      <img id="confirmImg" src="" />
+      <p>Total price: <span id="totalPrice"></span></p>
+
+      <button type="button" id="confirmBack">Back</button>
+    </div>
+    <script defer src="script.js"></script>
+  </body>
+</html>
