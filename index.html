@@ -4,65 +4,113 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buy a car</title>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/form.css" />
+    <script defer src="./scripts/cars.js"></script>
+    <script defer src="./scripts/script.js"></script>
   </head>
   <body>
-    <div class="bg">
-      <img src="./assets/Auto1.png" alt="" class="bg_img" />
-    </div>
-    <div class="carContainer">
-      <header>
-        <h1>Choose your dream car</h1>
-      </header>
-      <span id="carImg"></span>
-      <ul id="carListings"></ul>
-    </div>
-
-    <div id="form" class="hidden">
-      <div id="chosenCar">
-        <p>Total price: <span id="totalPrice"></span></p>
-        <p>Chosen car: <span id="carName"></span></p>
+    <header class="logo">
+      <img src="./assets/CarLogo.png" class="logo" />
+    </header>
+    <main>
+      <div class="carlist">
+        <h1>Buy the car of your dreams</h1>
+        <div class="containerCar" id="containerCar1">
+          <div class="carImg">
+            <img src="./assets/Ford Mustang Boss 429.png" />
+            <button class="orderBtn">Order now</button>
+          </div>
+        </div>
+        <div class="containerCar" id="containerCar2">
+          <div class="carImg">
+            <img src="./assets/Aston Martin DB5.png" />
+            <button class="orderBtn">Order now</button>
+          </div>
+        </div>
+        <div class="containerCar" id="containerCar3">
+          <div class="carImg">
+            <img src="./assets/Dodge Charger.png" />
+            <button class="orderBtn">Order now</button>
+          </div>
+        </div>
+        <div class="containerCar" id="containerCar4">
+          <div class="carImg">
+            <img src="./assets/Nissan Skyline R34.png" />
+            <button class="orderBtn">Order now</button>
+          </div>
+        </div>
+        <div class="containerCar" id="containerCar5">
+          <div class="carImg">
+            <img src="./assets/Batman Batmobile.png" />
+            <button class="orderBtn">Order now</button>
+          </div>
+        </div>
       </div>
 
-      <form id="cashLeasing">
-        <input type="radio" id="leasing" name="paymentOption" value="leasing" />
-        <label for="leasing">Leasing</label><br />
-        <input
-          type="radio"
-          id="cash"
-          name="paymentOption"
-          value="cash"
-          checked
-        />
-        <label for="cash">Cash</label>
-      </form>
+      <div id="configForm" class="hidden">
+        <h2 id="carName"></h2>
+        <div class="spacer" aria-hidden="true"></div>
 
-      <div id="ownerName">
-        <form>
-          <label for="nameSurname">Name Surname: </label>
-          <input type="text" id="nameSurname" required /><br />
-          <label for="deliveryDate">: Delivery date</label>
-          <input type="date" id="deliveryDate" required />
+        <form id="cashLeasing">
+          <input
+            type="radio"
+            id="leasing"
+            name="paymentOption"
+            value="leasing"
+          />
+          <label for="leasing">Leasing</label><br />
+          <input
+            type="radio"
+            id="cash"
+            name="paymentOption"
+            value="cash"
+            checked
+          />
+          <label for="cash">Cash</label><br />
         </form>
+
+        <div id="ownerName">
+          <form id="buyerName" autocomplete="off">
+            <label for="nameSurname">Buyer's name</label>
+            <input
+              type="text"
+              placeholder="Name Surname"
+              id="nameSurname"
+              required
+            /><br /><br />
+
+            <label for="deliveryDate">Delivery date</label>
+            <input type="date" id="deliveryDate" required min="" />
+          </form>
+        </div>
+        <div class="spacer" aria-hidden="true"></div>
+        <div id="accessoriesSection">
+          <div id="availableAccessories">
+            <label for="availableAccessoriesSelect"
+              >Available Accessories:</label
+            >
+            <select id="availableAccessoriesSelect" multiple>
+              <option value="tires">Winter tires - $2000</option>
+              <option value="sign">Signature - $500</option>
+              <option value="case">Special case - $1000</option>
+              <option value="films">Complete set of films - $500</option>
+            </select>
+            <button id="addAccessoryButton">Add Accessory</button>
+          </div>
+
+          <div id="orderedAccessories">
+            <label>Ordered Accessories:</label>
+            <div id="orderedAccessoriesButtons"></div>
+          </div>
+        </div>
+
+        <div class="spacer" aria-hidden="true"></div>
+        <div id="chosenCar">
+          <p>Total price: <span id="totalPrice"></span></p>
+        </div>
       </div>
-      <p>Accessories List</p>
-      <ul id="accessories"></ul>
-
-      <div id="orderSummary"></div>
-      <button type="button" id="confirm-order-btn">Confirm Order</button>
-      <button type="button" id="back-btn">Back</button>
-    </div>
-    <div id="confirmPage" class="hidden">
-      <p>
-        Thank you for shopping with us
-        <span id="confirmPageCar"></span>
-      </p>
-      <p>Chosen payment form: <span id="paymentForm"></span></p>
-      <img id="confirmImg" src="" />
-      <p>Total price: <span id="totalPrice"></span></p>
-
-      <button type="button" id="confirmBack">Back</button>
-    </div>
-    <script defer src="script.js"></script>
+      <div id="orderSummary" class="hidden"></div>
+    </main>
   </body>
 </html>
