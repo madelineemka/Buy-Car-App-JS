@@ -4,6 +4,7 @@
   --bluedark: rgb(74, 125, 145);
   --darker: rgb(43, 42, 42);
   --fontlight: rgb(231, 231, 240);
+  --green: rgba(49, 216, 194, 0.6);
 }
 
 * {
@@ -69,7 +70,7 @@ ul {
 }
 
 .containerCar img {
-  width: 300px;
+  width: 250px;
   height: auto;
   object-position: center;
   /* object-fit: cover; */
@@ -123,4 +124,11 @@ ul {
 
 .orderBtn:hover:after {
   transform: translateX(200px) rotate(20deg);
+}
+
+#chosenCarPrices {
+  text-align: center;
+}
+#chosenCarPrices p {
+  text-align: left;
 }

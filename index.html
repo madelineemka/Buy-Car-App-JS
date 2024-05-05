@@ -6,15 +6,13 @@
     <title>Buy a car</title>
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/form.css" />
-    <script defer src="./scripts/cars.js"></script>
-    <script defer src="./scripts/script.js"></script>
   </head>
   <body>
     <header class="logo">
       <img src="./assets/CarLogo.png" class="logo" />
     </header>
     <main>
-      <div class="carlist">
+      <div id="carList">
         <h1>Buy the car of your dreams</h1>
         <div class="containerCar" id="containerCar1">
           <div class="carImg">
@@ -48,28 +46,34 @@
         </div>
       </div>
 
+      <!-- Configuration form -->
       <div id="configForm" class="hidden">
         <h2 id="carName"></h2>
         <div class="spacer" aria-hidden="true"></div>
-
-        <form id="cashLeasing">
-          <input
-            type="radio"
-            id="leasing"
-            name="paymentOption"
-            value="leasing"
-          />
-          <label for="leasing">Leasing</label><br />
-          <input
-            type="radio"
-            id="cash"
-            name="paymentOption"
-            value="cash"
-            checked
-          />
-          <label for="cash">Cash</label><br />
-        </form>
-
+        <div id="chosenCar">
+          <form id="cashLeasing">
+            <input
+              type="radio"
+              id="leasing"
+              name="paymentOption"
+              value="leasing"
+            />
+            <label for="leasing">Leasing</label><br />
+            <input
+              type="radio"
+              id="cash"
+              name="paymentOption"
+              value="Cash"
+              checked
+            />
+            <label for="cash">Cash</label><br />
+          </form>
+          <div id="chosenCarPrices">
+            <p>Car price: <span id="chosenCarPrice"></span></p>
+            <p>Accessories price: <span id="chosenAccPrice"></span></p>
+            <p>Final price: <span id="finalPrice"></span></p>
+          </div>
+        </div>
         <div id="ownerName">
           <form id="buyerName" autocomplete="off">
             <label for="nameSurname">Buyer's name</label>
@@ -91,12 +95,18 @@
               >Available Accessories:</label
             >
             <select id="availableAccessoriesSelect" multiple>
-              <option value="tires">Winter tires - $2000</option>
-              <option value="sign">Signature - $500</option>
-              <option value="case">Special case - $1000</option>
-              <option value="films">Complete set of films - $500</option>
+              <option value="tires" data-price="1000">
+                Winter tires - $1000
+              </option>
+              <option value="sign" data-price="500">Signature - $500</option>
+              <option value="case" data-price="1000">
+                Special case - $1000
+              </option>
+              <option value="films" data-price="500">
+                Complete set of films - $500
+              </option>
             </select>
-            <button id="addAccessoryButton">Add Accessory</button>
+            <button id="addAccessoryButton">Add accessory</button>
           </div>
 
           <div id="orderedAccessories">
@@ -106,11 +116,38 @@
         </div>
 
         <div class="spacer" aria-hidden="true"></div>
-        <div id="chosenCar">
+
+        <div class="summaryBtn">
+          <button class="backBtn">Cancel</button>
+          <button class="confirmBtn">Confirm order</button>
+        </div>
+
+        <div class="spacer" aria-hidden="true"></div>
+
+        <div id="errorMessage" class="hidden"></div>
+      </div>
+
+      <!-- Summary of the order -->
+      <div id="orderSummary" class="hidden">
+        <img id="orderedCarImg" src="./assets/Auto1.png" alt="Ordered Car" />
+        <div id="oderSummaryCar">
+          <p>Thank you for your order</p>
+          <p>You have chosen</p>
+          <div class="spacer" aria-hidden="true"></div>
+          <p><span id="orderedCarModel"></span></p>
+          <div class="spacer" aria-hidden="true"></div>
+          <p>Chosen payment method: <span id="orderedCarPay"></span></p>
           <p>Total price: <span id="totalPrice"></span></p>
         </div>
+        <!-- <div class="spacer" aria-hidden="true"></div> -->
+        <div class="summaryBtn">
+          <button class="backBtnSummary">Back</button>
+        </div>
       </div>
-      <div id="orderSummary" class="hidden"></div>
     </main>
+    <script defer src="./scripts/cars.js"></script>
+    <script defer src="./scripts/script.js"></script>
+    <!-- <script defer src="./scripts/funk.js"></script> -->
+    <!-- <script defer src="./scripts/funkcje.js"></script> -->
   </body>
 </html>

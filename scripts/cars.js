@@ -8,7 +8,7 @@ const cars = [
     enginePower: "375",
     mileage: "30 000",
     price: 550000,
-    image: (src = "./assets/Ford Mustang Boss 429.png"),
+    image: "./assets/Ford Mustang Boss 429.png",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const cars = [
     enginePower: "286",
     mileage: "40 000",
     price: 5835000,
-    image: (src = "./assets/Aston Martin DB5.png"),
+    image: "./assets/Aston Martin DB5.png",
   },
 
   {
@@ -31,7 +31,7 @@ const cars = [
     enginePower: "900",
     mileage: "50 000",
     price: 1000000,
-    image: (src = "./assets/Dodge Charger.png"),
+    image: "./assets/Dodge Charger.png",
   },
   {
     id: 4,
@@ -42,7 +42,7 @@ const cars = [
     enginePower: "550",
     mileage: "50 000",
     price: 1357000,
-    image: (src = "./assets/Nissan Skyline R34.png"),
+    image: "./assets/Nissan Skyline R34.png",
   },
   {
     id: 5,
@@ -53,7 +53,7 @@ const cars = [
     enginePower: "340",
     mileage: "5 000",
     price: 1500000,
-    image: (src = "./assets/Batman Batmobile.png"),
+    image: "./assets/Batman Batmobile.png",
   },
 ];
 
