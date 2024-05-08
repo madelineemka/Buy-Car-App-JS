@@ -57,7 +57,7 @@ const cars = [
   },
 ];
 
-let carPrice = 0; //dodane
+let carPrice = 0;
 
 function formatPrice(price) {
   return price.toLocaleString("en-US", {
@@ -83,12 +83,13 @@ function displayConfigForm(car) {
   const carPriceElement = document.getElementById("chosenCarPrice");
   carPriceElement.innerHTML = `${formatPrice(car.price)}`;
 
-  carPrice = car.price; //dodane
+  carPrice = car.price;
 
   console.log("displayConfigForm ok");
 }
+
 ///////////////////
-//order buttons
+//Order buttons
 ///////////////////
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -97,12 +98,12 @@ document.addEventListener("DOMContentLoaded", function () {
   orderButtons.forEach((button) => {
     button.addEventListener("click", function () {
       const container = button.closest(".containerCar");
-      const carId = container.id.replace("containerCar", ""); // Pobierz id samochodu
-      const chosenCar = cars.find((car) => car.id == carId); // Znajdź wybrany samochód
+      const carId = container.id.replace("containerCar", ""); // Get car ID
+      const chosenCar = cars.find((car) => car.id == carId); // Find chosen car
 
-      displayConfigForm(chosenCar); // Wyświetl formularz konfiguracyjny z wybranym samochodem
+      displayConfigForm(chosenCar);
 
-      hideCarList(); // Ukryj listę samochodów
+      hideCarList();
 
       console.log("Order buttons");
     });
@@ -110,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 ///////////////////
-//Accessories and update final price
+//Final price = chosen car price + chosen accessories
 ///////////////////
 
 function updateFinalPrice(carPrice, accessoriesPrice) {
@@ -183,12 +184,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentDate = new Date();
   const defaultDeliveryDate = new Date(
     currentDate.getTime() + 14 * 24 * 60 * 60 * 1000
-  ); // 14 days from today
+  ); // Dodaj 14 dni do bieżącej daty
   const formattedDefaultDeliveryDate = defaultDeliveryDate
     .toISOString()
-    .split("T")[0]; // Format "YYYY-MM-DD"
-  deliveryDateInput.value = formattedDefaultDeliveryDate; // Set a default value for the date
-  deliveryDateInput.setAttribute("min", formattedDefaultDeliveryDate); // Set the min value for the date
+    .split("T")[0]; // Formatuj datę do postaci "YYYY-MM-DD"
+  deliveryDateInput.value = formattedDefaultDeliveryDate; // Ustaw wartość domyślną dla pola wyboru daty
+  deliveryDateInput.setAttribute("min", formattedDefaultDeliveryDate); // Ustaw wartość min dla pola wyboru daty
 });
 
 ///////////////////
@@ -201,7 +202,164 @@ const backToCarList = () => {
   configForm.classList.add("hidden");
   carList.classList.remove("hidden");
 
-  updateFinalPrice(0, 0);
+  // Zeruj finalną cenę
+  updateFinalPrice(0, 0); // Zeruj zarówno cenę samochodu, jak i dodatków
 };
 
 backBtn.addEventListener("click", backToCarList);
+
+///////////////////
+//confirmBtn
+///////////////////
+
+document.addEventListener("DOMContentLoaded", function () {
+  let chosenCar;
+
+  const orderButtons = document.querySelectorAll(".orderBtn");
+  orderButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const container = button.closest(".containerCar");
+      const carId = container.id.replace("containerCar", "");
+      chosenCar = cars.find((car) => car.id == carId);
+      displayConfigForm(chosenCar);
+      hideCarList();
+    });
+  });
+
+  const confirmBtn = document.querySelector(".confirmBtn");
+  confirmBtn.addEventListener("click", function () {
+    const nameSurnameInput = document.getElementById("nameSurname");
+    const deliveryDateInput = document.getElementById("deliveryDate");
+
+    if (!nameSurnameInput.value || !deliveryDateInput.value) {
+      showError("Fill in all required fields");
+      return;
+    }
+
+    const regex = /^[a-zA-Z]+\s[a-zA-Z]+$/;
+    if (!nameSurnameInput.value.match(regex)) {
+      showError("Name should be in format: Name Surname");
+      return;
+    }
+
+    localStorage.removeItem("nameSurname");
+    localStorage.removeItem("deliveryDate");
+
+    configForm.classList.add("hidden");
+    orderSummary.classList.remove("hidden");
+
+    const finalPrice = document.getElementById("finalPrice").textContent;
+
+    displayOrderSummary(finalPrice);
+  });
+
+  const backBtn = document.querySelector(".backBtn");
+  backBtn.addEventListener("click", function () {
+    const carList = document.getElementById("carList");
+    carList.classList.remove("hidden");
+    const configForm = document.getElementById("configForm");
+    configForm.classList.add("hidden");
+    const orderSummary = document.getElementById("orderSummary");
+    orderSummary.classList.add("hidden");
+  });
+
+  function displayOrderSummary(finalPrice) {
+    const orderedCarModel = document.getElementById("orderedCarModel");
+    const orderedCarPay = document.getElementById("orderedCarPay");
+    const finalPriceSummary = document.getElementById("finalPriceSummary");
+    const orderedCarImg = document.getElementById("orderedCarImg");
+
+    const chosenCarModel = `${chosenCar.driver}'s ${chosenCar.brand} ${chosenCar.model}`;
+    const chosenPaymentMethod = document.querySelector(
+      'input[name="paymentOption"]:checked'
+    ).value;
+
+    orderedCarModel.textContent = chosenCarModel;
+    orderedCarPay.textContent = chosenPaymentMethod;
+    finalPriceSummary.textContent = finalPrice;
+    orderedCarImg.src = chosenCar.image;
+  }
+
+  function showError(errorMessageText) {
+    const errorMessage = document.getElementById("errorMessage");
+    errorMessage.textContent = errorMessageText;
+    errorMessage.classList.remove("hidden");
+  }
+});
+
+///////////////////
+//backBtn Summary page - dodac zeby po nacisnieciu nie zerowala sie final price
+///////////////////
+const backBtnSummary = document.querySelector(".backBtnSummary");
+
+const backToForm = () => {
+  configForm.classList.remove("hidden");
+  orderSummary.classList.add("hidden");
+};
+
+backBtnSummary.addEventListener("click", backToForm);
+
+const hideError = () => {
+  errorMessage.classList.add("hidden");
+};
+
+backBtnSummary.addEventListener("click", hideError);
+
+///////////////////
+const confirmBtn = document.querySelector(".confirmBtn");
+//Saving form data in local storage (data to be removed after clicking (confirmBtn) function updated under confirmBtn)
+///////////////////
+
+function saveFormDataToLocalStorage() {
+  const nameSurnameInput = document.getElementById("nameSurname");
+  const deliveryDateInput = document.getElementById("deliveryDate");
+  const paymentOptionInput = document.querySelector(
+    'input[name="paymentOption"]:checked'
+  );
+
+  const formData = {
+    nameSurname: nameSurnameInput.value,
+    deliveryDate: deliveryDateInput.value,
+    paymentOption: paymentOptionInput ? paymentOptionInput.value : null,
+  };
+
+  localStorage.setItem("formData", JSON.stringify(formData));
+}
+
+// Po naciśnięciu przycisku "Confirm order", usuwamy dane z localStorage
+function removeFormDataFromLocalStorage() {
+  localStorage.removeItem("formData");
+}
+
+// Funkcja wywoływana po naciśnięciu przycisku "Confirm order"
+function handleConfirmOrderButtonClick() {
+  removeFormDataFromLocalStorage();
+  // Dodatkowe akcje związane z potwierdzeniem zamówienia
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const confirmBtn = document.querySelector(".confirmBtn");
+  confirmBtn.addEventListener("click", handleConfirmOrderButtonClick);
+
+  // Przywrócenie danych z localStorage po odświeżeniu strony
+  const formDataString = localStorage.getItem("formData");
+  if (formDataString) {
+    const formData = JSON.parse(formDataString);
+    const nameSurnameInput = document.getElementById("nameSurname");
+    const deliveryDateInput = document.getElementById("deliveryDate");
+    const paymentOptionInput = document.querySelector(
+      `input[name="paymentOption"][value="${formData.paymentOption}"]`
+    );
+
+    nameSurnameInput.value = formData.nameSurname;
+    deliveryDateInput.value = formData.deliveryDate;
+    if (paymentOptionInput) {
+      paymentOptionInput.checked = true;
+    }
+  }
+});
+
+// Po wprowadzeniu danych przez użytkownika, zapisujemy je w localStorage
+document
+  .getElementById("configForm")
+  .addEventListener("input", saveFormDataToLocalStorage);

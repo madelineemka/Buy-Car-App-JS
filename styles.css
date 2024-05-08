@@ -53,13 +53,13 @@ h1 {
 }
 
 .containerCar {
-  width: 60%;
+  width: 600px;
   height: auto;
   min-height: 300px;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   background: rgba(0, 0, 0, 0.75);
   background: linear-gradient(
     to right top,
@@ -83,7 +83,6 @@ h1 {
 }
 
 .carImg img {
-  size: 50%;
   display: block;
 }
 
@@ -92,9 +91,8 @@ ul {
 }
 
 .carDetails {
-  width: 50%;
+  width: 40%;
   align-items: center;
-  padding-left: 10%;
 }
 
 .containerCar ul li {
@@ -235,11 +233,6 @@ p {
 
 /*  */
 
-#availableAccessories {
-  display: flex;
-  flex-direction: column;
-}
-
 #accessoriesSection {
   display: flex;
   align-items: flex-start;
@@ -267,6 +260,24 @@ p {
   margin-bottom: 10px;
   cursor: pointer;
   text-align: center;
+}
+
+#availableAccessoriesSelect option {
+  width: 280px;
+  margin-top: 5px;
+  padding: 5px 0;
+  font-size: 14px;
+  background: linear-gradient(
+    to right top,
+    var(--darker),
+    rgba(255, 255, 255, 0.6)
+  );
+  cursor: pointer;
+  position: relative;
+  border: none;
+  border-radius: 5px;
+  left: 10px;
+  overflow: hidden;
 }
 
 #orderedAccessoriesButtons {
@@ -417,7 +428,7 @@ p {
 }
 
 #oderSummaryCar {
-  padding: 40px 0;
+  padding: 10px 0;
 }
 
 #orderSummary p {
