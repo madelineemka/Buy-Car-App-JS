@@ -82,6 +82,8 @@ function displayConfigForm(car) {
 
   const carPriceElement = document.getElementById("chosenCarPrice");
   carPriceElement.innerHTML = `${formatPrice(car.price)}`;
+  const finalPriceElement = document.getElementById("finalPrice");
+  finalPriceElement.innerHTML = `${formatPrice(car.price)}`;
 
   carPrice = car.price;
 

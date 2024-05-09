@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buy a car</title>
+    <title>Buy your dream car</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -225,21 +225,23 @@
             <label for="availableAccessoriesSelect"
               >Available Accessories:</label
             >
-            <button class="addAccessoryButton" id="accTires" acc-price="1000">
-              Winter tires - $1000
-            </button>
+            <div class="addAccButons">
+              <button class="addAccessoryButton" id="accTires" acc-price="1000">
+                Winter tires - $1000
+              </button>
 
-            <button class="addAccessoryButton" id="accSign" acc-price="500">
-              Signature - $500
-            </button>
+              <button class="addAccessoryButton" id="accSign" acc-price="500">
+                Signature - $500
+              </button>
 
-            <button class="addAccessoryButton" id="accCase" acc-price="1000">
-              Special case - $1000
-            </button>
+              <button class="addAccessoryButton" id="accCase" acc-price="1000">
+                Special case - $1000
+              </button>
 
-            <button class="addAccessoryButton" id="accFilms" acc-price="500">
-              Complete set of films - $500
-            </button>
+              <button class="addAccessoryButton" id="accFilms" acc-price="500">
+                Complete set of films - $500
+              </button>
+            </div>
           </div>
           <div id="orderedAccessories">
             <label>Ordered Accessories:</label>
@@ -260,15 +262,15 @@
       </div>
       <!-- Summary of the order -->
       <div id="orderSummary" class="hidden">
-        <img id="orderedCarImg" src="./assets/Auto1.png" alt="Ordered Car" />
+        <p>Thank you for your order</p>
+        <p>You have chosen</p>
+        <div class="spacer" aria-hidden="true"></div>
+        <img id="orderedCarImg" src="" alt="Ordered Car" />
         <div id="oderSummaryCar">
-          <p>Thank you for your order</p>
-          <p>You have chosen</p>
-          <div class="spacer" aria-hidden="true"></div>
           <p><span id="orderedCarModel"></span></p>
           <div class="spacer" aria-hidden="true"></div>
           <p>Chosen payment method: <span id="orderedCarPay"></span></p>
-          <p>Total price: <span id="totalPrice"></span></p>
+          <p>Final price: <span id="finalPriceSummary"></span></p>
         </div>
         <div class="spacer" aria-hidden="true"></div>
         <div class="summaryBtn">

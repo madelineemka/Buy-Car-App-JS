@@ -224,6 +224,11 @@ p {
   width: 80%;
 }
 
+.addAccButons {
+  display: flex;
+  flex-direction: column;
+}
+
 .availableAccessoriesAdd {
   text-align: center;
   display: block;
@@ -359,6 +364,10 @@ p {
   box-shadow: 0px 8px 24px 0 rgba(0, 0, 0, 0.5);
   left: 10px;
   overflow: hidden;
+}
+
+.addAccessoryButton {
+  width: 250px;
 }
 
 .confirmBtn {
