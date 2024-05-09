@@ -365,3 +365,24 @@ document.addEventListener("DOMContentLoaded", function () {
 document
   .getElementById("configForm")
   .addEventListener("input", saveFormDataToLocalStorage);
+
+//////////////
+//Filter
+//////////////
+
+function filterCarsByDriver() {
+  const driverFilterInput = document.getElementById("driverFilter");
+  const filterValue = driverFilterInput.value.toLowerCase();
+  const carItems = document.querySelectorAll(".containerCar");
+
+  carItems.forEach((carItem) => {
+    const carDriver = carItem
+      .querySelector(".carDriverSpan")
+      .textContent.toLowerCase();
+    if (carDriver.includes(filterValue)) {
+      carItem.style.display = "block";
+    } else {
+      carItem.style.display = "none";
+    }
+  });
+}
