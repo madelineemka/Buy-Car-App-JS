@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buy your dream car</title>
+    <title>Buy the car of your dreams</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -19,7 +19,7 @@
             type="text"
             id="driverFilter"
             oninput="filterCarsByDriver()"
-            placeholder="Enter driver's name"
+            placeholder="  Enter driver's name"
           />
         </div>
         <div class="containerCar" id="containerCar1">
@@ -231,9 +231,7 @@
         <div class="spacer" aria-hidden="true"></div>
         <div id="accessoriesSection">
           <div id="availableAccessories">
-            <label for="availableAccessoriesSelect"
-              >Available Accessories:</label
-            >
+            <p>Available Accessories:</p>
             <div class="addAccButons">
               <button class="addAccessoryButton" id="accTires" acc-price="1000">
                 Winter tires - $1000
@@ -253,7 +251,7 @@
             </div>
           </div>
           <div id="orderedAccessories">
-            <label>Ordered Accessories:</label>
+            <p>Ordered Accessories:</p>
             <div id="orderedAccessoriesButtons"></div>
           </div>
         </div>

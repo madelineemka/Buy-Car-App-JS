@@ -186,12 +186,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentDate = new Date();
   const defaultDeliveryDate = new Date(
     currentDate.getTime() + 14 * 24 * 60 * 60 * 1000
-  ); // Dodaj 14 dni do bieżącej daty
+  ); // Add 14 days to current date
   const formattedDefaultDeliveryDate = defaultDeliveryDate
     .toISOString()
-    .split("T")[0]; // Formatuj datę do postaci "YYYY-MM-DD"
-  deliveryDateInput.value = formattedDefaultDeliveryDate; // Ustaw wartość domyślną dla pola wyboru daty
-  deliveryDateInput.setAttribute("min", formattedDefaultDeliveryDate); // Ustaw wartość min dla pola wyboru daty
+    .split("T")[0]; // Format date "YYYY-MM-DD"
+  deliveryDateInput.value = formattedDefaultDeliveryDate; // Set default date
+  deliveryDateInput.setAttribute("min", formattedDefaultDeliveryDate); // Set min date
 });
 
 ///////////////////
@@ -204,8 +204,8 @@ const backToCarList = () => {
   configForm.classList.add("hidden");
   carList.classList.remove("hidden");
 
-  // Zeruj finalną cenę
-  updateFinalPrice(0, 0); // Zeruj zarówno cenę samochodu, jak i dodatków
+  // Zero out final price
+  updateFinalPrice(0, 0); // // Zero out car price and accessories price
 };
 
 backBtn.addEventListener("click", backToCarList);
@@ -290,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 ///////////////////
-//backBtn Summary page - dodac zeby po nacisnieciu nie zerowala sie final price
+//backBtn Summary page
 ///////////////////
 const backBtnSummary = document.querySelector(".backBtnSummary");
 
@@ -307,9 +307,10 @@ const hideError = () => {
 
 backBtnSummary.addEventListener("click", hideError);
 
-///////////////////
 const confirmBtn = document.querySelector(".confirmBtn");
-//Saving form data in local storage (data to be removed after clicking (confirmBtn) function updated under confirmBtn)
+
+///////////////////
+//Saving form data in local storage
 ///////////////////
 
 function saveFormDataToLocalStorage() {
@@ -328,22 +329,20 @@ function saveFormDataToLocalStorage() {
   localStorage.setItem("formData", JSON.stringify(formData));
 }
 
-// Po naciśnięciu przycisku "Confirm order", usuwamy dane z localStorage
+// After click "Confirm order", removing data from localStorage
 function removeFormDataFromLocalStorage() {
   localStorage.removeItem("formData");
 }
 
-// Funkcja wywoływana po naciśnięciu przycisku "Confirm order"
 function handleConfirmOrderButtonClick() {
   removeFormDataFromLocalStorage();
-  // Dodatkowe akcje związane z potwierdzeniem zamówienia
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   const confirmBtn = document.querySelector(".confirmBtn");
   confirmBtn.addEventListener("click", handleConfirmOrderButtonClick);
 
-  // Przywrócenie danych z localStorage po odświeżeniu strony
+  // Restoring data from localStorage after page refresh
   const formDataString = localStorage.getItem("formData");
   if (formDataString) {
     const formData = JSON.parse(formDataString);
@@ -361,7 +360,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Po wprowadzeniu danych przez użytkownika, zapisujemy je w localStorage
+// Save form data in localStorage
 document
   .getElementById("configForm")
   .addEventListener("input", saveFormDataToLocalStorage);
@@ -380,7 +379,7 @@ function filterCarsByDriver() {
       .querySelector(".carDriverSpan")
       .textContent.toLowerCase();
     if (carDriver.includes(filterValue)) {
-      carItem.style.display = "block";
+      carItem.style.display = "flex";
     } else {
       carItem.style.display = "none";
     }

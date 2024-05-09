@@ -80,23 +80,17 @@ h1 {
   height: auto;
   object-position: center;
   text-align: center;
-}
-
-.carImg img {
   display: block;
 }
 
-ul {
+.containerCar ul li {
+  padding-bottom: 8px;
   list-style: none;
 }
 
 .carDetails {
   width: 40%;
   align-items: center;
-}
-
-.containerCar ul li {
-  padding-bottom: 8px;
 }
 
 .orderBtn {
@@ -140,10 +134,10 @@ ul {
   transform: translateX(200px) rotate(20deg);
 }
 
-/* FORM styles */
 .hidden {
   display: none;
 }
+/* FORM styles */
 
 h2 {
   text-align: center;
@@ -158,10 +152,11 @@ p {
   align-items: flex-start;
   justify-content: space-around;
 }
+
 #configForm,
 #orderSummary {
   width: 70vw;
-  height: 90vh;
+  height: 80vh;
   position: relative;
   align-items: center;
   background: rgba(0, 0, 0, 0.75);
@@ -227,72 +222,34 @@ p {
 .addAccButons {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
-
-.availableAccessoriesAdd {
-  text-align: center;
-  display: block;
-  padding: 10px 12px;
-  width: 100%;
-}
-
-/*  */
 
 #accessoriesSection {
   display: flex;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
-#availableAccessories label,
-#orderedAccessories label {
+#availableAccessories,
+#orderedAccessories {
   text-align: center;
   display: block;
   padding: 10px 12px;
-  width: 100%;
-}
-
-#availableAccessoriesSelect {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: 140px;
-  width: 300px;
-  background: none;
-  border: none;
-  overflow: hidden;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  text-align: center;
-}
-
-#availableAccessoriesSelect option {
-  width: 280px;
-  margin-top: 5px;
-  padding: 5px 0;
-  font-size: 14px;
-  background: linear-gradient(
-    to right top,
-    var(--darker),
-    rgba(255, 255, 255, 0.6)
-  );
-  cursor: pointer;
-  position: relative;
-  border: none;
-  border-radius: 5px;
-  left: 10px;
-  overflow: hidden;
+  /* width: 100%; */
 }
 
 #orderedAccessoriesButtons {
+  width: 280px;
   height: 140px;
-  width: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   background: none;
+  margin-bottom: 10px;
   border: none;
   overflow: hidden;
   border-radius: 5px;
-  margin-bottom: 10px;
   cursor: pointer;
   text-align: center;
 }
@@ -397,11 +354,14 @@ p {
   transform: rotate(20deg);
 }
 
-.addAccessoryButton:hover:after,
 .backBtn:hover:after,
 .confirmBtn:hover:after,
 .backBtnSummary:hover:after {
-  transform: translateX(250px) rotate(20deg);
+  transform: translateX(280px) rotate(20deg);
+}
+
+.addAccessoryButton:hover:after {
+  transform: translateX(300px) rotate(20deg);
 }
 
 #errorMessage {
@@ -414,7 +374,7 @@ p {
   background-color: rgba(235, 12, 12, 0.4);
 }
 
-/* oder summary style */
+/* order summary style */
 
 #orderSummary img {
   width: 300px;
@@ -474,4 +434,57 @@ p {
 .carDriver,
 .carDriverSpan {
   color: rgb(130, 223, 247);
+}
+
+@media only screen and (max-width: 600px) {
+  .containerCar {
+    width: 60vw;
+    height: auto;
+    flex-direction: column;
+    padding-top: 5px;
+    font-size: 12px;
+  }
+
+  .containerCar img {
+    width: 150px;
+    height: auto;
+    object-position: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .carImg {
+    padding-bottom: 15px;
+  }
+
+  .orderBtn {
+    margin: 0px;
+    width: 120px;
+
+    padding: 5px 0;
+    font-size: 16px;
+    font-weight: 300px;
+  }
+
+  .addAccessoryButton,
+  .orderedAccessoryButton {
+    width: 100px;
+  }
+  #orderedAccessoriesButtons {
+    width: 220px;
+    /* height: 140px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: none;
+    margin-bottom: 10px;
+    border: none;
+    overflow: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center; */
+  }
+
+  #orderSummary img {
+    width: 150px;
+  }
 }
