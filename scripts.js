@@ -21,7 +21,6 @@ const cars = [
     price: 5835000,
     image: "./assets/Aston Martin DB5.png",
   },
-
   {
     id: 3,
     brand: "Dodge",
@@ -47,7 +46,7 @@ const cars = [
   {
     id: 5,
     brand: "Batmobil",
-    model: "Batman and Batman Returs",
+    model: "Batman and Batman Returns",
     year: 1989,
     driver: "Batman",
     enginePower: "340",
@@ -70,7 +69,6 @@ function formatPrice(price) {
 function hideCarList() {
   const carList = document.querySelector("#carList");
   carList.classList.add("hidden");
-  console.log("Car list is hidden ok");
 }
 
 function displayConfigForm(car) {
@@ -86,35 +84,7 @@ function displayConfigForm(car) {
   finalPriceElement.innerHTML = `${formatPrice(car.price)}`;
 
   carPrice = car.price;
-
-  console.log("displayConfigForm ok");
 }
-
-///////////////////
-//Order buttons
-///////////////////
-
-document.addEventListener("DOMContentLoaded", function () {
-  const orderButtons = document.querySelectorAll(".orderBtn");
-
-  orderButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const container = button.closest(".containerCar");
-      const carId = container.id.replace("containerCar", ""); // Get car ID
-      const chosenCar = cars.find((car) => car.id == carId); // Find chosen car
-
-      displayConfigForm(chosenCar);
-
-      hideCarList();
-
-      console.log("Order buttons");
-    });
-  });
-});
-
-///////////////////
-//Final price = chosen car price + chosen accessories
-///////////////////
 
 function updateFinalPrice(carPrice, accessoriesPrice) {
   const finalPriceElement = document.getElementById("finalPrice");
@@ -123,6 +93,68 @@ function updateFinalPrice(carPrice, accessoriesPrice) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  setupEventListeners();
+});
+
+function setupEventListeners() {
+  setupOrderButtons();
+  setupAddAccessoryButtons();
+  setupConfirmButton();
+}
+
+///////////////////
+//Order buttons
+function setupOrderButtons() {
+  const orderButtons = document.querySelectorAll(".orderBtn");
+  orderButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const container = button.closest(".containerCar");
+      const carId = container.id.replace("containerCar", ""); // Get car ID
+      const chosenCar = cars.find((car) => car.id == carId); // Find chosen car
+
+      displayConfigForm(chosenCar);
+      hideCarList();
+    });
+  });
+
+  const confirmBtn = document.querySelector(".confirmBtn");
+  confirmBtn.addEventListener("click", handleConfirmOrderButtonClick);
+
+  // Restoring data from localStorage after page refresh
+  const formDataString = localStorage.getItem("formData");
+  if (formDataString) {
+    const formData = JSON.parse(formDataString);
+    const nameSurnameInput = document.getElementById("nameSurname");
+    const deliveryDateInput = document.getElementById("deliveryDate");
+    const paymentOptionInput = document.querySelector(
+      `input[name="paymentOption"][value="${formData.paymentOption}"]`
+    );
+
+    nameSurnameInput.value = formData.nameSurname;
+    deliveryDateInput.value = formData.deliveryDate;
+    if (paymentOptionInput) {
+      paymentOptionInput.checked = true;
+    }
+  }
+
+  const deliveryDateInput = document.getElementById("deliveryDate");
+  const currentDate = new Date();
+  const defaultDeliveryDate = new Date(
+    currentDate.getTime() + 14 * 24 * 60 * 60 * 1000
+  ); // Add 14 days to current date
+  const formattedDefaultDeliveryDate = defaultDeliveryDate
+    .toISOString()
+    .split("T")[0]; // Format date "YYYY-MM-DD"
+  deliveryDateInput.value = formattedDefaultDeliveryDate; // Set default date
+  deliveryDateInput.setAttribute("min", formattedDefaultDeliveryDate); // Set min date
+
+  let driverFilterInput = document.getElementById("driverFilter");
+  driverFilterInput.addEventListener("input", filterCarsByDriver);
+}
+
+///////////////////
+//Chosen accessories
+function setupAddAccessoryButtons() {
   const addAccessoryButtons = document.querySelectorAll(".addAccessoryButton");
   const orderedAccessoriesButtons = document.getElementById(
     "orderedAccessoriesButtons"
@@ -175,46 +207,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const accessoriesPriceElement = document.getElementById("chosenAccPrice");
     accessoriesPriceElement.textContent = formatPrice(price);
   }
-});
+}
 
 ///////////////////
-//Set the date to 14 days from today
-///////////////////
-
-document.addEventListener("DOMContentLoaded", function () {
-  const deliveryDateInput = document.getElementById("deliveryDate");
-  const currentDate = new Date();
-  const defaultDeliveryDate = new Date(
-    currentDate.getTime() + 14 * 24 * 60 * 60 * 1000
-  ); // Add 14 days to current date
-  const formattedDefaultDeliveryDate = defaultDeliveryDate
-    .toISOString()
-    .split("T")[0]; // Format date "YYYY-MM-DD"
-  deliveryDateInput.value = formattedDefaultDeliveryDate; // Set default date
-  deliveryDateInput.setAttribute("min", formattedDefaultDeliveryDate); // Set min date
-});
-
-///////////////////
-//backBtn
-///////////////////
-
-const backBtn = document.querySelector(".backBtn");
-
-const backToCarList = () => {
-  configForm.classList.add("hidden");
-  carList.classList.remove("hidden");
-
-  // Zero out final price
-  updateFinalPrice(0, 0); // // Zero out car price and accessories price
-};
-
-backBtn.addEventListener("click", backToCarList);
-
-///////////////////
-//confirmBtn
-///////////////////
-
-document.addEventListener("DOMContentLoaded", function () {
+//Confirm Button
+function setupConfirmButton() {
   let chosenCar;
 
   const orderButtons = document.querySelectorAll(".orderBtn");
@@ -287,11 +284,23 @@ document.addEventListener("DOMContentLoaded", function () {
     errorMessage.textContent = errorMessageText;
     errorMessage.classList.remove("hidden");
   }
-});
+}
+
+///////////////////
+//backBtn Form
+const backBtn = document.querySelector(".backBtn");
+
+const backToCarList = () => {
+  configForm.classList.add("hidden");
+  carList.classList.remove("hidden");
+
+  updateFinalPrice(0, 0); // // Zero out car price and accessories price
+};
+
+backBtn.addEventListener("click", backToCarList);
 
 ///////////////////
 //backBtn Summary page
-///////////////////
 const backBtnSummary = document.querySelector(".backBtnSummary");
 
 const backToForm = () => {
@@ -310,9 +319,7 @@ backBtnSummary.addEventListener("click", hideError);
 const confirmBtn = document.querySelector(".confirmBtn");
 
 ///////////////////
-//Saving form data in local storage
-///////////////////
-
+//Saving form data to local storage
 function saveFormDataToLocalStorage() {
   const nameSurnameInput = document.getElementById("nameSurname");
   const deliveryDateInput = document.getElementById("deliveryDate");
@@ -338,37 +345,12 @@ function handleConfirmOrderButtonClick() {
   removeFormDataFromLocalStorage();
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const confirmBtn = document.querySelector(".confirmBtn");
-  confirmBtn.addEventListener("click", handleConfirmOrderButtonClick);
-
-  // Restoring data from localStorage after page refresh
-  const formDataString = localStorage.getItem("formData");
-  if (formDataString) {
-    const formData = JSON.parse(formDataString);
-    const nameSurnameInput = document.getElementById("nameSurname");
-    const deliveryDateInput = document.getElementById("deliveryDate");
-    const paymentOptionInput = document.querySelector(
-      `input[name="paymentOption"][value="${formData.paymentOption}"]`
-    );
-
-    nameSurnameInput.value = formData.nameSurname;
-    deliveryDateInput.value = formData.deliveryDate;
-    if (paymentOptionInput) {
-      paymentOptionInput.checked = true;
-    }
-  }
-});
-
-// Save form data in localStorage
 document
   .getElementById("configForm")
   .addEventListener("input", saveFormDataToLocalStorage);
 
 //////////////
 //Filter
-//////////////
-
 function filterCarsByDriver() {
   const driverFilterInput = document.getElementById("driverFilter");
   const filterValue = driverFilterInput.value.toLowerCase();
@@ -379,9 +361,11 @@ function filterCarsByDriver() {
       .querySelector(".carDriverSpan")
       .textContent.toLowerCase();
     if (carDriver.includes(filterValue)) {
-      carItem.style.display = "flex";
+      carItem.classList.remove("hidden");
+      carItem.classList.add("flex");
     } else {
-      carItem.style.display = "none";
+      carItem.classList.remove("flex");
+      carItem.classList.add("hidden");
     }
   });
 }

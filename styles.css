@@ -137,6 +137,11 @@ h1 {
 .hidden {
   display: none;
 }
+
+.flex {
+  display: flex;
+}
+
 /* FORM styles */
 
 h2 {
